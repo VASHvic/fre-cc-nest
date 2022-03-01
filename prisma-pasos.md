@@ -1,0 +1,7 @@
+- instalar prisma com a -D
+- instalar prisma client
+- npx prisma init
+- canviar conexió db
+- agregar models a schemal
+- npx prisma migrate dev
+- npx prisma generate: crea models typesctipt
