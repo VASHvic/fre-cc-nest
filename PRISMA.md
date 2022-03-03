@@ -5,3 +5,4 @@
 - agregar models a schemal
 - npx prisma migrate dev -> npx prisma migrate dev --name init
 - npx prisma generate: crea models typesctipt
+- si falla conexió, afegir &connect_timeout=30 a la url del prisma service

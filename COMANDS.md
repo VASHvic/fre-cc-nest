@@ -1,0 +1,3 @@
+- nest g module user -> y per a bookmark
+- y crear servicios tmb
+- npm i @nestjs/config
