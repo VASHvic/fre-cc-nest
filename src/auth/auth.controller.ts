@@ -13,6 +13,7 @@ export class AuthController {
 
   @Post('signin')
   signin(@Body() dto: AuthDto) {
+    // returns the user based on the accestoken
     return this.authService.signin(dto);
   }
 }
