@@ -1,0 +1,10 @@
+npm i -D Pactum ->
+
+modificar  "test:e2e": "jest --watch --runInBand --config ./test/jest-e2e.json"
+En el tut posava --no-cache pero es més lento, recomanable si vas sobrat
+
+Per a la poder tindre dos bases de datos, una normal y una test y manejarles en dotenv:
+npm i -D dotenv-cli
+canviar comandos amb dotenv i afegir contenedor test a compose
+afegir comando pre: 
+"pretest:e2e": .....

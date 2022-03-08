@@ -12,6 +12,12 @@ export class PrismaService extends PrismaClient {
         },
       },
     });
-    console.log(config);
+  }
+  cleanDb() {
+    // $transaction es per a fer-ho en orden
+    return this.$transaction([
+      this.bookmark.deleteMany(),
+      this.user.deleteMany(),
+    ]);
   }
 }

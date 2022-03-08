@@ -1,14 +1,24 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { Request } from 'express';
-import { JwtGuard } from 'src/auth/guard';
+import { Controller, Get, UseGuards, Patch, Body } from '@nestjs/common';
+import { User } from '@prisma/client';
+import { GetUser } from '../auth/decorator/get-user.decorator';
+import { JwtGuard } from '../auth/guard';
+import { EditUserDto } from './dto';
+import { UserService } from './user.service';
 
+@UseGuards(JwtGuard) // recordar que Authorization va en el header al enviar el request
 @Controller('users')
 export class UserController {
+  constructor(private userService: UserService) {}
   // Authguard jwt ve de jwt strategy
-  @UseGuards(JwtGuard) // recordar que Authorization va en el header al enviar el request
   @Get('me')
-  getMe(@Req() req: Request) {
-    return req.user;
+  getMe(@GetUser() user: User, @GetUser('email') email: string) {
+    console.log({ email });
+
+    return user;
+  }
+
+  @Patch()
+  editUser(@GetUser('id') userId: number, @Body() dto: EditUserDto) {
+    return this.userService.editUser(userId, dto);
   }
 }
