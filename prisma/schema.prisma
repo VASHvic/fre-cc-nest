@@ -32,7 +32,7 @@ model Bookmark {
   updatedAt DateTime @updatedAt
 
   title      String
-  desciption String?
+  description String?
   link       String
 
   userId Int

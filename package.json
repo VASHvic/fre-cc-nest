@@ -10,7 +10,7 @@
     "db:dev:rm": "docker compose rm postgres -s -f -v",
     "db:dev:up": "docker compose up postgres -d",
     "db:dev:restart": "npm db:dev:rm && npm db:dev:up && sleep1 && npx prisma migrate deploy",
-    "prisma:test:deploy": "dotenv -e .env.test -- prisma migrate deploy",
+    "prisma:test:deploy": "dotenv -e .env.test -- npx prisma migrate deploy",
     "db:test:rm": "docker compose rm test-db -s -f -v",
     "db:test:up": "docker compose up test-db -d",
     "db:test:restart": "npm db:test:rm && db:test:up && npx prisma migrate deploy",
@@ -29,6 +29,7 @@
     "restart:testdb": " docker compose rm test-db -s -f -v & docker compose up test-db -d",
     "test:studio": "dotenv -e .env.test -- npx prisma studio",
     "migrate:test": "dotenv -e .env.test -- npx prisma migrate deploy",
+    "new:migrate:test": "dotenv -e .env.test -- npx prisma migrate dev",
     "test:e2e": "dotenv -e .env.test -- jest --watch --runInBand --config ./test/jest-e2e.json"
   },
   "dependencies": {
