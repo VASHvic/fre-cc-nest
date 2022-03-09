@@ -30,7 +30,8 @@
     "test:studio": "dotenv -e .env.test -- npx prisma studio",
     "migrate:test": "dotenv -e .env.test -- npx prisma migrate deploy",
     "new:migrate:test": "dotenv -e .env.test -- npx prisma migrate dev",
-    "test:e2e": "dotenv -e .env.test -- jest --watch --runInBand --config ./test/jest-e2e.json"
+    "test:e2e": "dotenv -e .env.test -- jest  --watch --runInBand --config ./test/jest-e2e.json",
+    "test:int": "dotenv -e .env.test -- jest -i --verbose --no-cache --watch --runInBand --config ./test/integration/jest-int.json"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
