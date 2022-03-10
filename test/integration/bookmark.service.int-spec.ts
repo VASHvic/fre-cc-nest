@@ -33,9 +33,27 @@ describe('Bookmark Service Integration Test', () => {
       userId = user.id;
       expect(user.email).toBe('caca@cacamail.com');
     });
+    it('Getbookmarks should get undefined if no bookmarks exist', async () => {
+      const bookmarks = await bookmarkService.getBookmarks(userId);
+      expect(bookmarks).toBeUndefined;
+      expect(bookmarks.length).toBe(0);
+    });
     it('should create a bookmark', async () => {
       const bookmark = await bookmarkService.createBookmark(userId, dto);
       bookmarkId = bookmark.id;
+      expect(bookmark.title).toBe(dto.title);
+      expect(bookmark.description).toBe(dto.description);
+      expect(bookmark.link).toBe(dto.link);
+    });
+    it('Getbookmarks should get one bookmark', async () => {
+      const bookmarks = await bookmarkService.getBookmarks(userId);
+      expect(bookmarks.length).toBe(1);
+    });
+    it('Should find the created bookmark by id', async () => {
+      const bookmark = await bookmarkService.getBookmarkById(
+        userId,
+        bookmarkId,
+      );
       expect(bookmark.title).toBe(dto.title);
       expect(bookmark.description).toBe(dto.description);
       expect(bookmark.link).toBe(dto.link);
@@ -62,6 +80,25 @@ describe('Bookmark Service Integration Test', () => {
         .editBookmarkById(999999, bookmarkId, editDto)
         .then((bookmark) => expect(bookmark).toBeUndefined)
         .catch((error) => expect(error.status).toBe(403));
+    });
+    it('Should find the edited bookmark by id', async () => {
+      const bookmark = await bookmarkService.getBookmarkById(
+        userId,
+        bookmarkId,
+      );
+      expect(bookmark.title).toBe(editDto.title);
+      expect(bookmark.description).toBe(editDto.description);
+      expect(bookmark.link).toBe(editDto.link);
+    });
+  });
+  describe('Delete Bookmark', () => {
+    it('Should delete a bookmark by id', async () => {
+      await bookmarkService.deleteBookmarkById(userId, bookmarkId);
+    });
+    it('Getbookmarks should get undefined if no bookmarks exist', async () => {
+      const bookmarks = await bookmarkService.getBookmarks(userId);
+      expect(bookmarks).toBeUndefined;
+      expect(bookmarks.length).toBe(0);
     });
   });
 });
